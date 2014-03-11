@@ -1,0 +1,9 @@
+<%= link_to "<<back", gallery_path(@image.gallery_id) %>
+
+<h1><%= @image.name %></h1>
+
+<img src="<%= @image.url %>",  max width = 900px> 
+
+<p><%= @image.description %></p>
+
+<%= link_to "Edit This Image", edit_image_path(@image) %>

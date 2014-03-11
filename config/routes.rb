@@ -13,7 +13,8 @@ Pixtr::Application.routes.draw do
   # patch "/galleries/:id" => "galleries#update"
   # delete "/galleries/:id" => "galleries#destroy"
   
-    resources :images  #nested this within resources :galleries by nesting it in a block.  this nests the urls within gallery urls    
+    resources :images, shallow: true  #nested this within resources :galleries by nesting it in a block.  this nests the urls within gallery urls
+                                      #shallow method eliminates galleries from url where it is not needed, e.g. all but new and create for images
   end
   
   

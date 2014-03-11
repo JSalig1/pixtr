@@ -1,0 +1,17 @@
+<%= link_to "<<back", gallery_path(@image.gallery_id) %>
+
+<h1><%= @image.name %></h1>
+
+<img src="<%= @image.url %>"> 
+
+<p><%= @image.description %></p>
+
+<%= link_to "Edit This Image", edit_image_path(@image) %>
+
+
+<%= form_for([@image]) do |form| %>   <!-- #note the parenthesis are optional and you should leave them off in practice -->
+	<%= form.text_field :name, placeholder: "Name" %>
+	<%= form.text_field :description, placeholder: "Description" %>
+	<%= form.text_field :url, placeholder: "URL" %>
+	<%= form.submit "Update Image" %>
+<% end %>
