@@ -1,4 +1,33 @@
 Pixtr::Application.routes.draw do
+  
+  
+  get "/galleries/random" => "random_galleries#show"  #<--- new controller same model! :) stick to same 7 actions for all and no additional!
+  
+  root "galleries#index" #same as -- get "/" => "galleries#index"
+  
+  resources :galleries do #replaces all lines below and also includes an additional root route.  got to rails.info for route list
+  # get "/galleries/new" => "galleries#new"
+  # get "/galleries/:id" => "galleries#show", as: :gallery
+  # post "/galleries" => "galleries#create"
+  # get "/galleries/:id/edit" => "galleries#edit"
+  # patch "/galleries/:id" => "galleries#update"
+  # delete "/galleries/:id" => "galleries#destroy"
+  
+    resources :images  #nested this within resources :galleries by nesting it in a block.  this nests the urls within gallery urls    
+  end
+  
+  
+end
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -53,4 +82,3 @@ Pixtr::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-end
