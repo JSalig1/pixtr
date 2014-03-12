@@ -2,7 +2,8 @@
 
 <h1><%= @image.name %></h1>
 
-<img src="<%= @image.url %>",  max width = 900px> 
+<%= image_tag(@image.url) %>
+<!-- <img src="<%= @image.url %>",  max width = 900px>  -->
 
 <p><%= @image.description %></p>
 

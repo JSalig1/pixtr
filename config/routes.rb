@@ -12,11 +12,13 @@ Pixtr::Application.routes.draw do
   # get "/galleries/:id/edit" => "galleries#edit"
   # patch "/galleries/:id" => "galleries#update"
   # delete "/galleries/:id" => "galleries#destroy"
-  
-    resources :images, shallow: true  #nested this within resources :galleries by nesting it in a block.  this nests the urls within gallery urls
+    
+    resources :images, only: [:new, :create] #better practices, being specific keeps your routes file short and concise!  use only: and except:
+    # resources :images, shallow: true  #nested this within resources :galleries by nesting it in a block.  this nests the urls within gallery urls
                                       #shallow method eliminates galleries from url where it is not needed, e.g. all but new and create for images
   end
-  
+
+  resources :images, except: [:new, :create]
   
 end
   

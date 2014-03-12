@@ -15,18 +15,22 @@
 </nav>
 
 <br>
+<br>
+<br>
 
 <div>	
 	<% @gallery.images.each do |image| %>	
 
-	<nav>
-		<!-- <p><%= "#{image.name}: #{image.description}" %></p> -->
-		<p><%= link_to "Delete image above", image, method: :delete, confirm: "Are you sure?" %></p>
-		<!-- <%= link_to "Edit This Image", edit_image_path(image) %> -->  <!-- MOVED TO IMAGE SHOW VIEW -->
-	</nav>	
-		<%= link_to image do%>
-			<img src="<%= image.url %>", max width = 500px >
+
+
+	
+		<%= link_to image do %>
+			<img src="<%= image.url %>", width = 500px >
 		<% end %>
+		
+		<!-- <p><%= "#{image.name}: #{image.description}" %></p> -->
+		<%= link_to "Delete image", image, method: :delete, confirm: "Are you sure?" %>
+		<!-- <%= link_to "Edit This Image", edit_image_path(image) %> -->  <!-- MOVED TO IMAGE SHOW VIEW -->
 	
 		<h2><%= link_to image.name, image %></h2>  <!-- #let link_to do the heavy lifting with polymorphic_path -->
 		<!-- <h2><%= link_to image.name, image_path(image) %></h2> -->
