@@ -5,6 +5,9 @@ Pixtr::Application.routes.draw do
   
   root "galleries#index" #same as -- get "/" => "galleries#index"
   
+  resources :users, only: [:new, :create]
+  resource :session, only: [:new, :create, :destroy]  #note the singular resource, session is singilr here because we don't want it to require an id
+  
   resources :galleries do #replaces all lines below and also includes an additional root route.  got to rails.info for route list
   # get "/galleries/new" => "galleries#new"
   # get "/galleries/:id" => "galleries#show", as: :gallery
