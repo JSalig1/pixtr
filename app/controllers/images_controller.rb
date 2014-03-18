@@ -5,7 +5,9 @@ class ImagesController < ApplicationController
     
     @comment = Comment.new
     
-    @comments = @image.comments.recent      #.where("body ILIKE ? '%wombat%'")
+    @comments = @image.comments.recent.page(params[:page]).per(2)      #.where("body ILIKE ? '%wombat%'")
+    
+    
     
   end
   

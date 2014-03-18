@@ -38,6 +38,8 @@
 
 <%= render @comments %> <!-- this is shortform for the line below. sometimes you'll need to use the long way. -->
 
+<%= paginate @comments %>
+
 <!-- THIS is the case where Ruby calls class on whatever object you pass into the render method and it will both infer the view path and set the local variable name accordingly. -->
 
 <!-- <%= render({ partial: "comments/comment", collection: @comments }) %> -->  <!-- replaces the WHOLE BLOCK below :) parenthesis and curly's for illustration, optional -->
