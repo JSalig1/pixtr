@@ -6,12 +6,19 @@
 
 <p><%= @image.description %></p>
 
-<%= link_to "Edit This Image", edit_image_path(@image) %>
+
 
 
 <%= form_for([@image]) do |form| %>   <!-- #note the parenthesis are optional and you should leave them off in practice -->
+
+
+
+	<%= render "form_errors", target: @image %>
+
+
+
 	<%= form.text_field :name, placeholder: "Name" %>
-	<%= form.text_field :description, placeholder: "Description" %>
+	<%= form.text_area :description, placeholder: "Description" %>
 	<%= form.text_field :url, placeholder: "URL" %>
 	<%= form.submit "Update Image" %>
 <% end %>

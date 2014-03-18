@@ -2,9 +2,52 @@
 
 <h1><%= @image.name %></h1>
 
-<%= image_tag(@image.url) %>
+<%= image_tag(@image.url, width: 400) %>
 <!-- <img src="<%= @image.url %>",  max width = 900px>  -->
 
 <p><%= @image.description %></p>
 
-<%= link_to "Edit This Image", edit_image_path(@image) %>
+<div>
+	<% if @image.user == current_user %>
+	<%= link_to "Edit This Image", edit_image_path(@image) %>
+
+	<%= link_to "Delete image", @image, method: :delete, confirm: "Are you sure?" %>
+
+	
+	<% end %>
+</div>
+
+
+
+<div>
+	<% if signed_in? %>
+	
+		<%= form_for([@image, @comment]) do |form| %>   <!-- #note the parenthesis are optional and you should leave them off in practice -->
+
+			<%= form.text_area :body %>
+
+			<%= form.submit "Comment" %>
+		<% end %>
+		
+	<% else %>
+	
+		<%= link to "Sign In", sign_in_path %> to comment.
+	<% end %>
+	
+</div>
+
+<%= render @comments %> <!-- this is shortform for the line below. sometimes you'll need to use the long way. -->
+
+<!-- THIS is the case where Ruby calls class on whatever object you pass into the render method and it will both infer the view path and set the local variable name accordingly. -->
+
+<!-- <%= render({ partial: "comments/comment", collection: @comments }) %> -->  <!-- replaces the WHOLE BLOCK below :) parenthesis and curly's for illustration, optional -->
+<!-- Ruby will inspect the class of whatever object you pass into  the key :collection and in the partial will pass that object into the local variable of the same (downcased) name. -->
+<!-- actually.... the local variable in your partial comes from the partial name... not the above... whoops! -->
+
+<!-- <% @comments.each do |comment| %> -->	
+
+	<!-- <%= render "comments/comment", comment: comment %> -->   <!-- looks in applications views and image views by default so we have to explicitly tell it the path. -->
+	
+	<!-- the key above :comment becomes the local variable in our _comment partial view -->
+
+<!-- <% end %> -->

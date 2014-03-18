@@ -6,13 +6,7 @@
 </nav>
 
 
-<ul>
-	<% @galleries.each do |gallery| %>
-    <li>
-			<%= link_to gallery.name, gallery %>  <!-- #never need gallery_path, just put gallery and rails will know -->
-			<!-- <%= link_to gallery.name, gallery_path(gallery) %> --> <!-- rails will auto-call method id on any object to get an integer so gallery.id becomes just gallery -->
-			<!-- <%= link_to gallery.name, "/galleries/#{gallery.id}" %> -->
-		</li>
-	<% end %>
-</ul>
+<%= render @galleries %>
+
+
 	

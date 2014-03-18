@@ -4,6 +4,7 @@
 
 
 <nav>
+	<% if @gallery.user == current_user %>
 	<%= link_to "Edit Gallery", edit_gallery_path(@gallery) %>
 	<!-- <%= link_to "Edit Gallery", "/galleries/#{@gallery.id}/edit" %> -->
 
@@ -12,35 +13,17 @@
 	<!-- <%= link_to "Delete Gallery", "/galleries/#{@gallery.id}", method: :delete %> -->
 	
 	<%= link_to "Add Image", new_gallery_image_path(@gallery) %> <!-- #we need gallery there with the id so the app knows which gallery the image belongs to. -->
+	<% end %>
 </nav>
 
 <br>
 <br>
 <br>
 
-<div>	
-	<% @gallery.images.each do |image| %>	
+<%= render @gallery.images %>
 
 
 
-	
-		<%= link_to image do %>
-			<img src="<%= image.url %>", width = 500px >
-		<% end %>
-		
-		<!-- <p><%= "#{image.name}: #{image.description}" %></p> -->
-		<%= link_to "Delete image", image, method: :delete, confirm: "Are you sure?" %>
-		<!-- <%= link_to "Edit This Image", edit_image_path(image) %> -->  <!-- MOVED TO IMAGE SHOW VIEW -->
-	
-		<h2><%= link_to image.name, image %></h2>  <!-- #let link_to do the heavy lifting with polymorphic_path -->
-		<!-- <h2><%= link_to image.name, image_path(image) %></h2> -->
-	
-		<p><%= image.description %></p>
-	
-		<!-- <%= link_to image_tag(image.url), image %> -->  <!-- #let link_to do the heavy lifting with polymorphic_path -->
-		<!-- <%= link_to image_tag(image.url), image_path(image) %> -->  <!-- #method image_tag accepts argument image.url to make clickable pictures -->
-		<!-- <img src="<%= image.url %>">  -->
-	
-	
-	<% end %>
-</div>
+
+
+

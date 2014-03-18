@@ -1,4 +1,8 @@
 <%= form_for(@gallery) do |form| %>
+
+	<%= render "form_errors", target: @gallery %> <!-- #render takes in two things: a path to a partial, and an argument to pass in variables -->
+
 	<%= form.text_field :name %>
 	<%= form.submit "Create Gallery" %>
 <% end %>
+

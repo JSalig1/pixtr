@@ -3,7 +3,8 @@ Pixtr::Application.routes.draw do
   
   get "/galleries/random" => "random_galleries#show"  #<--- new controller same model! :) stick to same 7 actions for all and no additional!
   
-  root "galleries#index" #same as -- get "/" => "galleries#index"
+  root "homes#show"
+  # root "galleries#index" #same as -- get "/" => "galleries#index"
   
   resources :galleries do #replaces all lines below and also includes an additional root route.  got to rails.info for route list
   # get "/galleries/new" => "galleries#new"
@@ -17,8 +18,12 @@ Pixtr::Application.routes.draw do
     # resources :images, shallow: true  #nested this within resources :galleries by nesting it in a block.  this nests the urls within gallery urls
                                       #shallow method eliminates galleries from url where it is not needed, e.g. all but new and create for images
   end
+  
+  resources :images, except: [:index, :new, :create] do
+    resources :comments, only: [:create]  #no :new bc we don't need a form for a new comment
+  end
 
-  resources :images, except: [:new, :create]
+
   
 end
   
