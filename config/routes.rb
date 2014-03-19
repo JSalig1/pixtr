@@ -25,9 +25,22 @@ Pixtr::Application.routes.draw do
     resources :comments, only: [:create]  #no :new bc we don't need a form for a new comment
   end
 
-  
 
   
+  resources :users, only: [:show] do
+       
+    # resources :following_relationships, only: [:create]
+    
+    # the above is functionally correct, the bottom does the same but replaces 'user_following_relationships' with 'follow' in all path helper methods
+    
+    # collection do, is the other and is more for an :index action
+    
+    member do # /users/:id
+      post "/follow" => "following_relationships#create" # /users/:id/follow
+    end
+    
+  end
+    
 end
   
   
