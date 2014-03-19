@@ -7,6 +7,10 @@
 
 <p><%= @image.description %></p>
 
+<p>Added by: <%= link_to @image.user.email, @image.user %></p>
+<p>Added on: <%= @image.created_at.to_date %></p>
+
+
 <div>
 	<% if @image.user == current_user %>
 	<%= link_to "Edit This Image", edit_image_path(@image) %>

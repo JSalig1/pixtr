@@ -1,0 +1,8 @@
+
+
+<h2>Pictures uploaded by <%= @user.email %></h2>
+<%= button_to "Follow", follow_user_path(@user) %>
+
+<br>
+
+<%= render @images %>

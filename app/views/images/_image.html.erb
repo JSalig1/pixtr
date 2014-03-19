@@ -1,9 +1,16 @@
+<%= link_to image_tag(image.url, width: 500), image %>
+By: <%= link_to image.user.email, image.user %>
+
+
+
 		
 		
 		
-<%= link_to image do %>
+<!-- <%= link_to image do %>
 	<img src="<%= image.url %>", width = 500px >
-<% end %>
+<% end %> -->
+
+
 
 <h2><%= link_to image.name, image %></h2>  <!-- #let link_to do the heavy lifting with polymorphic_path -->
 <!-- <h2><%= link_to image.name, image_path(image) %></h2> -->
