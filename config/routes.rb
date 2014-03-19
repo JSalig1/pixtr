@@ -7,22 +7,25 @@ Pixtr::Application.routes.draw do
   # root "galleries#index" #same as -- get "/" => "galleries#index"
   
   resources :galleries do #replaces all lines below and also includes an additional root route.  got to rails.info for route list
-  # get "/galleries/new" => "galleries#new"
-  # get "/galleries/:id" => "galleries#show", as: :gallery
-  # post "/galleries" => "galleries#create"
-  # get "/galleries/:id/edit" => "galleries#edit"
-  # patch "/galleries/:id" => "galleries#update"
-  # delete "/galleries/:id" => "galleries#destroy"
-    
+        # get "/galleries/new" => "galleries#new"
+        # get "/galleries/:id" => "galleries#show", as: :gallery
+        # post "/galleries" => "galleries#create"
+        # get "/galleries/:id/edit" => "galleries#edit"
+        # patch "/galleries/:id" => "galleries#update"
+        # delete "/galleries/:id" => "galleries#destroy"
+      
     resources :images, only: [:new, :create] #better practices, being specific keeps your routes file short and concise!  use only: and except:
     # resources :images, shallow: true  #nested this within resources :galleries by nesting it in a block.  this nests the urls within gallery urls
                                       #shallow method eliminates galleries from url where it is not needed, e.g. all but new and create for images
   end
   
+  resources :groups, only: [:index, :new, :create, :show]
+  
   resources :images, except: [:index, :new, :create] do
     resources :comments, only: [:create]  #no :new bc we don't need a form for a new comment
   end
 
+  
 
   
 end
