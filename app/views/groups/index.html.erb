@@ -1,0 +1,7 @@
+<%= link_to "Add a Group", new_group_path %>
+
+<ul>
+	<% @groups.each do |group| %>
+		<li><%= link_to group.name, groups_path %></li>
+	<% end %>
+</ul>

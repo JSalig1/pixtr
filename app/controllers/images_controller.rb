@@ -39,6 +39,8 @@ class ImagesController < ApplicationController
     @image = current_user.images.find(params[:id])
     # @image = Image.find(params[:id])
     
+    @groups = current_user.groups
+    
   end
   
   def update
@@ -47,7 +49,8 @@ class ImagesController < ApplicationController
     # image = Image.find(params[:id])
     if @image.update(image_params)
       redirect_to @image
-    else
+    else    
+      @groups = current_user.groups      
       render :edit
     end
   end
@@ -68,7 +71,8 @@ class ImagesController < ApplicationController
     params.require(:image).permit(
       :name, 
       :description, 
-      :url
+      :url,
+      group_ids: [] #must come last in the order
     )
   end
   

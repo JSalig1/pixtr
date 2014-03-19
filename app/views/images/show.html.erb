@@ -24,7 +24,7 @@
 	
 		<%= form_for([@image, @comment]) do |form| %>   <!-- #note the parenthesis are optional and you should leave them off in practice -->
 
-			<%= form.text_area :body %>
+			<%= form.text_area :body, size: "55x5" %>
 
 			<%= form.submit "Comment" %>
 		<% end %>
