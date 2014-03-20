@@ -37,6 +37,12 @@ Pixtr::Application.routes.draw do
     
     member do # /users/:id
       post "/follow" => "following_relationships#create" # /users/:id/follow
+      delete "/unfollow" => "following_relationships#destroy" # /users/:id/unfollow
+    end
+    
+    collection do # /users/
+      get "/following" => "following_relationships#index" # /users/following
+      get "/followers" => "following_relationships#index" # /users/following
     end
     
   end

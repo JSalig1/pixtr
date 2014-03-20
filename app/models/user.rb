@@ -35,8 +35,18 @@ class User < ActiveRecord::Base
   has_many :group_memberships, foreign_key: :member_id #otherwise rails assumes it will be the name of this class + "_id"
   has_many :groups, through: :group_memberships
   
+  
+  def following? user
+    followed_user_ids.include? user.id
+  end
+
+  
   def follow user # parenthesis left off, the irony of this comment will drive you crazy
     followed_users << user
+  end
+  
+  def unfollow user
+    followed_users.destroy user
   end
   
 end

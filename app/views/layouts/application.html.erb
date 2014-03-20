@@ -13,8 +13,10 @@
 	<% if signed_in? %>
 		<nav>
 			<ul>
-				<li> <h1> <%= link_to "Galleries", galleries_path %> </h1> </li>
-				<li> <h1> <%= link_to "Groups", groups_path %> </h1> </li>
+				<li> <h1> <%= link_to "My Galleries", galleries_path %> </h1> </li>
+				<li> <h1> <%= link_to "My Groups", groups_path %> </h1> </li>
+				<li> <h1> <%= link_to "Users I'm Following", following_users_path %> </h1> </li>
+				<li> <h1> <%= link_to "Users Following Me", followers_users_path %> </h1> </li>
 			</ul>
 		</nav>
 	<% end %>
