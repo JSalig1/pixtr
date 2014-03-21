@@ -14,15 +14,25 @@ Pixtr::Application.routes.draw do
         # patch "/galleries/:id" => "galleries#update"
         # delete "/galleries/:id" => "galleries#destroy"
       
-    resources :images, only: [:new, :create] #better practices, being specific keeps your routes file short and concise!  use only: and except:
-    # resources :images, shallow: true  #nested this within resources :galleries by nesting it in a block.  this nests the urls within gallery urls
-                                      #shallow method eliminates galleries from url where it is not needed, e.g. all but new and create for images
+    resources :images, only: [:new, :create]
+    
+                               
   end
   
-  resources :groups, only: [:index, :new, :create, :show]
+  resources :groups, only: [:index, :new, :create, :show] do
+    member do 
+      post "join" => "group_memberships#create"
+      delete "leave" => "group_memberships#destroy"
+    end
+  end
   
   resources :images, except: [:index, :new, :create] do
     resources :comments, only: [:create]  #no :new bc we don't need a form for a new comment
+    member do 
+      post "like" => "likes#create"
+      delete "unlike" => "likes#destroy"
+      
+    end 
   end
 
 

@@ -5,6 +5,16 @@
 <%= image_tag(@image.url, width: 400) %>
 <!-- <img src="<%= @image.url %>",  max width = 900px>  -->
 
+<p><%= @image.likes.count %> users like this image. </p>
+
+<% if current_user.like? @image %>
+	<%= button_to "Unlike", unlike_image_path, method: :delete %>
+<% else %>
+	<%= button_to "Like", like_image_path %>
+<% end %>
+
+
+
 <p><%= @image.description %></p>
 
 <p>Added by: <%= link_to @image.user.email, @image.user %></p>
