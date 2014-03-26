@@ -3,7 +3,7 @@ class ImagesController < ApplicationController
   def show
     @image = Image.find(params[:id])
     
-    @comment = Comment.new
+    @comment = Comment.new # wombat
     
     @comments = @image.comments.recent.page(params[:page]).per(2)      #.where("body ILIKE ? '%wombat%'")
     

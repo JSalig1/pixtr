@@ -6,6 +6,8 @@ Pixtr::Application.routes.draw do
   root "homes#show"
   # root "galleries#index" #same as -- get "/" => "galleries#index"
   
+  resource :dashboard, only: [:show]
+  
   resources :galleries do #replaces all lines below and also includes an additional root route.  got to rails.info for route list
         # get "/galleries/new" => "galleries#new"
         # get "/galleries/:id" => "galleries#show", as: :gallery
@@ -13,6 +15,12 @@ Pixtr::Application.routes.draw do
         # get "/galleries/:id/edit" => "galleries#edit"
         # patch "/galleries/:id" => "galleries#update"
         # delete "/galleries/:id" => "galleries#destroy"
+        
+    member do 
+      post "like" => "gallery_likes#create"
+      delete "unlike" => "gallery_likes#destroy"
+  
+    end 
       
     resources :images, only: [:new, :create]
     
@@ -24,13 +32,18 @@ Pixtr::Application.routes.draw do
       post "join" => "group_memberships#create"
       delete "leave" => "group_memberships#destroy"
     end
+    member do 
+      post "like" => "group_likes#create"
+      delete "unlike" => "group_likes#destroy"
+  
+    end 
   end
   
   resources :images, except: [:index, :new, :create] do
     resources :comments, only: [:create]  #no :new bc we don't need a form for a new comment
     member do 
-      post "like" => "likes#create"
-      delete "unlike" => "likes#destroy"
+      post "like" => "image_likes#create"
+      delete "unlike" => "image_likes#destroy"
       
     end 
   end

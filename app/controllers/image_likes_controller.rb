@@ -1,14 +1,14 @@
-class LikesController < ApplicationController
+class ImageLikesController < ApplicationController
   
   def create
     image = Image.find(params[:id])
-    current_user.likes image
+    current_user.like image
     redirect_to image
   end
   
   def destroy
     image = Image.find(params[:id])
-    current_user.unlikes image
+    current_user.unlike image
     redirect_to image
   end
   

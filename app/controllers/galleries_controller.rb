@@ -30,6 +30,7 @@ class GalleriesController < ApplicationController
     @gallery = current_user.galleries.new(gallery_params) #we get current_user as a helper from application controller via clearance which you can read on github
     # gallery = Gallery.create(gallery_params)
     if @gallery.save
+      current_user.notify_followers(@gallery, "GalleryActivity")
       redirect_to @gallery #replaces below because rails will use polymorphic_path to find url and will automatically call .id on it at the same time
       # redirect_to gallery_path(gallery)   #rails via helpers will automatically call id on the object in the argument
       # redirect_to gallery_path(gallery.id)   #using helpers for urls
@@ -47,7 +48,7 @@ class GalleriesController < ApplicationController
   def update
     @gallery = current_user.galleries.find(params[:id])
     if @gallery.update(gallery_params)
-      redirect_to gallery_path(@gallery)  #I added this comment using VIM
+      redirect_to gallery_path(@gallery)
     else
       render :edit
     end

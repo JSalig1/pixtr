@@ -3,6 +3,15 @@
 <h1> <%= @gallery.name %> </h1>
 
 
+
+
+<% if current_user.like? @gallery %>
+	<%= button_to "Unlike this Gallery", unlike_gallery_path, method: :delete %>
+<% else %>
+	<%= button_to "Like this Gallery", like_gallery_path %>
+<% end %>
+
+
 <nav>
 	<% if @gallery.user == current_user %>
 	<%= link_to "Edit Gallery", edit_gallery_path(@gallery) %>

@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   
-  before_action :authorize
+  before_action :authorize, except: [:show]
   
   def index
     @groups = current_user.groups
@@ -13,7 +13,8 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
-      @group.members << current_user
+      # @group.members << current_user
+      current_user.join @group
       redirect_to @group
     else
       render :new

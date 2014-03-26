@@ -1,10 +1,25 @@
 <h2><%= @group.name %></h2>
 
 
-<% if !current_user.member? @group %>
-	<%= button_to "Join Group", join_group_path(@group)%>
+<% if current_user.like? @group %>
+	<%= button_to "Unlike this Group", unlike_group_path, method: :delete %>
 <% else %>
-	<%= button_to "Leave Group", leave_group_path(@group), method: :delete %>
+	<%= button_to "Like this Group", like_group_path %>
+<% end %>
+
+
+<% if signed_in? %>
+
+	
+	
+	<% if !current_user.member? @group %>
+		<%= button_to "Join Group", join_group_path(@group)%>
+	<% else %>
+		<%= button_to "Leave Group", leave_group_path(@group), method: :delete %>
+	<% end %>
+	
+	
+
 <% end %>
 
 <p>	

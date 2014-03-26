@@ -5,6 +5,8 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :image
   
+  has_many :activities, as: :subject, dependent: :destroy
+  
   validates :body, presence: true  #data validation, comes from ActiveRecord::Base!
   validates :user, presence: true
   
