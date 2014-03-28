@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
     # followed_users << user
     
     following_relationship = followed_user_relationships.create(followed_user: user)
-    notify_followers.(following_relationship, 'FollowActivity')
+    # notify_followers.(following_relationship, 'FollowActivity')
     
     # followers.each do |follower|
     #   follower.activities.create(
@@ -112,12 +112,14 @@ class User < ActiveRecord::Base
   end
   
   def notify_followers(subject, type)
-    
-    followers.each do |follower|
-      follower.activities.create(
-      subject: subject,
-      type: type
-      )
+    if subject.persisted?
+      followers.each do |follower|
+        new_activity = follower.activities.create(
+        subject: subject,
+        type: type
+        )
+        UserMailer.notification_email(follower, new_activity).deliver
+      end
     end
     
   end

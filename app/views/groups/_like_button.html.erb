@@ -1,0 +1,10 @@
+
+<div id="like_button_form">
+
+	<% if current_user.like? @group %>
+		<%= button_to "Unlike this Group", unlike_group_path, method: :delete, remote: true %>
+	<% else %>
+		<%= button_to "Like this Group", like_group_path, remote: true %>
+	<% end %>
+	
+</div>

@@ -7,18 +7,24 @@ class CommentsController < ApplicationController
   def create
     
     
-    image = Image.find(params[:image_id])
+    @image = Image.find(params[:image_id])
     # comment = current_user.make_comment(comment_params) #can also go this way....
-    comment = image.comments.new(comment_params) # can also use: comment = image.comments.build(comment_params)
-    if comment.save
-      redirect_to image, notice: "Comment added!" # can also use alert: in place of notice:
+    @comment = @image.comments.new(comment_params) # can also use: comment = image.comments.build(comment_params)
+    if @comment.save
+      #redirect_to image, notice: "Comment added!" # can also use alert: in place of notice:
       
-      current_user.notify_followers(comment, "CommentActivity")
+      current_user.notify_followers(@comment, "CommentActivity")
       
     else
-      redirect_to image, alert: "Can not comment with an empty comment."  # can also use notice: in place of alert:
+      redirect_to @image, alert: "Can not comment with an empty comment."  # can also use notice: in place of alert:
     end
     
+  end
+  
+  def destroy
+    @comment = current_user.comments.find(params[:id])
+    @comment.destroy
+
   end
   
   

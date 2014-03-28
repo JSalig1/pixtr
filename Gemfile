@@ -41,11 +41,12 @@ group :production do
 end
 
 
-# group :development do
+group :development do
+  gem 'letter_opener'
 #   gem 'pry-rails'
 #   gem 'better_errors'
 #   gem 'binding_of_caller'
-# end
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

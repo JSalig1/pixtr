@@ -39,6 +39,8 @@ Pixtr::Application.routes.draw do
     end 
   end
   
+  resources :comments, only: [:destroy]
+  
   resources :images, except: [:index, :new, :create] do
     resources :comments, only: [:create]  #no :new bc we don't need a form for a new comment
     member do 

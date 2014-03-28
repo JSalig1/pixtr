@@ -5,13 +5,16 @@
 <%= image_tag(@image.url, width: 400) %>
 <!-- <img src="<%= @image.url %>",  max width = 900px>  -->
 
-<p><%= pluralize(@image.likes.count, "like") %></p>
 
-<% if current_user.like? @image %>
-	<%= button_to "Unlike", unlike_image_path, method: :delete %>
-<% else %>
-	<%= button_to "Like", like_image_path %>
-<% end %>
+<div id="like_image_form">
+	<p><%= pluralize(@image.likes.count, "like") %></p>
+
+	<% if current_user.like? @image %>
+		<%= button_to "Unlike", unlike_image_path, method: :delete, remote: true %>
+	<% else %>
+		<%= button_to "Like", like_image_path, remote: true %>
+	<% end %>
+</div>
 
 
 
@@ -24,10 +27,7 @@
 <div>
 	<% if @image.user == current_user %>
 	<%= link_to "Edit This Image", edit_image_path(@image) %>
-
-	<%= link_to "Delete image", @image, method: :delete, confirm: "Are you sure?" %>
-
-	
+	<%= link_to "Delete image", @image, method: :delete, confirm: "Are you sure?" %>	
 	<% end %>
 </div>
 
@@ -36,23 +36,27 @@
 <div>
 	<% if signed_in? %>
 	
-		<%= form_for([@image, @comment]) do |form| %>   <!-- #note the parenthesis are optional and you should leave them off in practice -->
-
+	<div id="comment_form">
+		<%= form_for([@image, @comment], remote: true) do |form| %>   <!-- #note the parenthesis are optional and you should leave them off in practice -->
 			<%= form.text_area :body, size: "55x5" %>
-
 			<%= form.submit "Comment" %>
 		<% end %>
+	</div>
 		
-	<% else %>
-	
+		
+	<% else %>	
 		<%= link to "Sign In", sign_in_path %> to comment.
-	<% end %>
-	
+	<% end %>	
 </div>
 
-<%= render @comments %> <!-- this is shortform for the line below. sometimes you'll need to use the long way. -->
 
+<div id="comments_displayed">
+<%= render @comments %> <!-- this is shortform for the line below. sometimes you'll need to use the long way. -->
+</div>
+
+<div id= "paginate">
 <%= paginate @comments %>
+</div>
 
 <!-- THIS is the case where Ruby calls class on whatever object you pass into the render method and it will both infer the view path and set the local variable name accordingly. -->
 

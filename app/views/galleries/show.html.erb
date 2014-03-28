@@ -2,14 +2,15 @@
 
 <h1> <%= @gallery.name %> </h1>
 
+<%= render "like_button", gallery: @gallery %>
 
-
-
-<% if current_user.like? @gallery %>
-	<%= button_to "Unlike this Gallery", unlike_gallery_path, method: :delete %>
-<% else %>
-	<%= button_to "Like this Gallery", like_gallery_path %>
-<% end %>
+<!-- <div id="like_button_form">
+	<% if current_user.like? @gallery %>
+		<%= button_to "Unlike this Gallery", unlike_gallery_path, method: :delete, remote: true %>
+	<% else %>
+		<%= button_to "Like this Gallery", like_gallery_path, remote: true %>
+	<% end %>
+</div> -->
 
 
 <nav>

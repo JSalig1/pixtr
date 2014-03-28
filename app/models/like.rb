@@ -12,3 +12,4 @@ class Like < ActiveRecord::Base
   #   uniqueness: { scope: :likable }
 
 end
+
