@@ -31,6 +31,16 @@ gem 'clearance'
 
 gem 'kaminari'
 
+gem 'sass'
+
+gem 'bourbon'
+
+gem 'neat'
+
+gem 'bitters'
+
+
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -43,6 +53,8 @@ end
 
 group :development do
   gem 'letter_opener'
+  gem 'quiet_assets'
+  gem 'bullet'
 #   gem 'pry-rails'
 #   gem 'better_errors'
 #   gem 'binding_of_caller'

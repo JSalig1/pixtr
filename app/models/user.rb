@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   def join group
     # groups << group
     group_membership = group_memberships.create(group: group)
-    notify_followers(@gallery, "GalleryActivity")
+    notify_followers(group_membership, "GroupMembershipActivity", group)
     # followers.each do |follower|
     #   follower.activities.create(
     #   subject: group_membership,
@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
   def like target
     # liked_images << image
     like = likes.create(likable: target)
-    notify_followers(like, "LikeActivity")
+    notify_followers(like, "LikeActivity", target)
     # followers.each do |follower|
     #   follower.activities.create(
     #   subject: like,
@@ -111,12 +111,14 @@ class User < ActiveRecord::Base
     like.destroy
   end
   
-  def notify_followers(subject, type)
+  def notify_followers(subject, type, target)
     if subject.persisted?
       followers.each do |follower|
         new_activity = follower.activities.create(
         subject: subject,
-        type: type
+        type: type,
+        actor: self,
+        target: target
         )
         UserMailer.notification_email(follower, new_activity).deliver
       end

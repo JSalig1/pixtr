@@ -8,9 +8,77 @@
 </head>
 <body>
 	
-	<h1> <%= link_to "Pixter", root_path %> </h1>
-	
+	<header class="navigation">
+	  <div class="menu-wrapper">
+	    <a href="javascript:void(0)" class="logo">
+	      <img src="https://raw.github.com/Magnus-G/Random/master/placeholder_logo_1.png" alt="">
+	    </a>
+	    <p class="menu-button" id="js-mobile-menu">MENU</p>
+	    <div class="nav">
+				
+				
+	      <ul id="navigation-menu">
+					<% if signed_in? %>
+		        <li><a href="javascript:void(0)"><%= link_to "My Galleries", galleries_path %></a></li>
+
+
+		        <li><a href="javascript:void(0)"><%= link_to "My Groups", groups_path %></a></li>
+		        <li><a href="javascript:void(0)"><%= link_to "My Friends", following_users_path %></a></li>
+						
+						
+						
+						
+						
+						
+						
+						
+					<% end %>
+	        <!-- <li class="navigation-search-bar">
+	          <div class="search-bar">
+	            <div class="search-and-submit">
+	              <input type="search" placeholder="Enter Search" />
+	              <button type="submit">
+	                <img src="https://raw.githubusercontent.com/Magnus-G/Random/master/search-icon.png" alt="">
+	              </button>
+	            </div>
+	          </div>
+	        </li> -->
+					<% if signed_in? %>
+		        <li class="sign-up"><%= link_to 'Sign out', sign_out_path, :method => :delete %></a></li>
+					<% else %>
+						<li class="sign-up"><%= link_to 'Sign in', sign_in_path %></a></li>
+				  <% end %>
+	      </ul>
+	    </div>
+	  </div>
+	</header>
 	<% if signed_in? %>
+		<div class="sign-in-status">Signed in as: <%= current_user.email %></a></div>
+	<% end %>
+
+	<script>
+	  $(function() {
+	    var menu = $('#navigation-menu');
+	    var menuToggle = $('#js-mobile-menu');
+
+	    $(menuToggle).on('click', function(e) {
+	      e.preventDefault();
+	      menu.slideToggle(function(){
+	        if(menu.is(':hidden')) {
+	          menu.removeAttr('style');
+	        }
+	      });
+	    });
+	  });
+	</script>
+	
+	
+	
+
+	
+	<!-- <h1> <%= link_to "Pixter", root_path %> </h1> -->
+	
+	<!-- <% if signed_in? %>
 		<nav>
 			<ul>
 				<li> <h1> <%= link_to "My Galleries", galleries_path %> </h1> </li>
@@ -19,22 +87,23 @@
 				<li> <h1> <%= link_to "Users Following Me", followers_users_path %> </h1> </li>
 			</ul>
 		</nav>
-	<% end %>
+	<% end %> -->
 	
-  <% if signed_in? %>
+  <!-- <% if signed_in? %>
     Signed in as: <%= current_user.email %>
     <%= link_to 'Sign out', sign_out_path, :method => :delete %>
   <% else %>
     <%= link_to 'Sign in', sign_in_path %>
-  <% end %>
+  <% end %> -->
 
   <div id="flash">
     <% flash.each do |key, value| %>
       <div class="flash <%= key %>"><%= value %></div>
     <% end %>
   </div>
-
-<%= yield %>
+<div>
+	<%= yield %>
+</div>
 
 </body>
 </html>

@@ -3,6 +3,8 @@ class Gallery < ActiveRecord::Base
   belongs_to :user
   has_many :likes, as: :likable, dependent: :destroy
   
+  
+  
   has_many :activities, as: :subject, dependent: :destroy
   
   validates :name, presence: true

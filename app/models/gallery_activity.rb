@@ -1,7 +1,7 @@
 class GalleryActivity < Activity
   
   def owner
-    subject.user.email
+    actor.email
   end
   
   def gallery_name
@@ -9,7 +9,7 @@ class GalleryActivity < Activity
   end
   
   def gallery
-    subject
+    target
   end
   
 

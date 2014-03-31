@@ -1,11 +1,11 @@
 class LikeActivity < Activity
   
   def email
-    subject.user.email
+    actor.email
   end
   
   def likable
-    subject.likable
+    target
   end
   
   def likable_name
