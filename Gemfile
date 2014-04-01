@@ -39,6 +39,10 @@ gem 'neat'
 
 gem 'bitters'
 
+gem 'delayed_job_active_record'
+
+gem 'daemons'
+
 
 
 group :doc do

@@ -31,7 +31,7 @@ class GalleriesController < ApplicationController
     @gallery = current_user.galleries.new(gallery_params) #we get current_user as a helper from application controller via clearance which you can read on github
     # gallery = Gallery.create(gallery_params)
     if @gallery.save
-      current_user.notify_followers(current_user, "GalleryActivity", @gallery)
+      current_user.delay.notify_followers(current_user, "GalleryActivity", @gallery)
       redirect_to @gallery #replaces below because rails will use polymorphic_path to find url and will automatically call .id on it at the same time
       # redirect_to gallery_path(gallery)   #rails via helpers will automatically call id on the object in the argument
       # redirect_to gallery_path(gallery.id)   #using helpers for urls
