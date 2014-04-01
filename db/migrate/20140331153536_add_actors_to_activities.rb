@@ -4,3 +4,4 @@ class AddActorsToActivities < ActiveRecord::Migration
     add_column :activities, :target_id, :integer
     add_column :activities, :target_type, :string
   end
+end
