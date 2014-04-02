@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   def join group
     # groups << group
     group_membership = group_memberships.create(group: group)
-    delay.notify_followers(group_membership, "GroupMembershipActivity", group)
+    notify_followers(group_membership, "GroupMembershipActivity", group)
     # followers.each do |follower|
     #   follower.activities.create(
     #   subject: group_membership,
@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
   def like target
     # liked_images << image
     like = likes.create(likable: target)
-    delay.notify_followers(like, "LikeActivity", target)
+    notify_followers(like, "LikeActivity", target)
     # followers.each do |follower|
     #   follower.activities.create(
     #   subject: like,
@@ -125,7 +125,6 @@ class User < ActiveRecord::Base
     end
     
   end
-  
-  
+  handle_asynchronously :notify_followers
   
 end
