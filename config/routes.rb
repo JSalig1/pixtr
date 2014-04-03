@@ -27,6 +27,8 @@ Pixtr::Application.routes.draw do
                                
   end
   
+  resources :charges, only: [:new, :create]
+  
   get 'tags/:tag', to: 'images#index', as: :tag
   
   get '/search', to: 'searches#index'

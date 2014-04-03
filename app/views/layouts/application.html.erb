@@ -6,7 +6,7 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="layout-background">
 	
 	<header class="navigation">
 	  <div class="menu-wrapper">
@@ -75,12 +75,18 @@
 					<% else %>
 						<li class="sign-up"><%= link_to 'Sign in', sign_in_path %></a></li>
 				  <% end %>
+					<% if signed_in? && !current_user.upgraded? %>
+		        <li class="subscribe"><%= link_to 'Go PRO', new_charge_path %></a></li>
+					<% end %>
 	      </ul>
 	    </div>
 	  </div>
 	</header>
 	<% if signed_in? %>
 		<div class="sign-in-status">Signed in as: <%= current_user.email %></a></div>
+	<% end %>
+	<% if signed_in? && current_user.upgraded? %>
+		<div class="sign-in-status">You're a Rockstar!</a></div>
 	<% end %>
 
 	<script>
