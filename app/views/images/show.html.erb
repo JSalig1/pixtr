@@ -5,6 +5,7 @@
 <%= image_tag(@image.url, width: 400) %>
 <!-- <img src="<%= @image.url %>",  max width = 900px>  -->
 
+Tags: <%= raw @image.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
 
 <div id="like_image_form">
 	<p><%= pluralize(@image.likes.count, "like") %></p>

@@ -24,25 +24,52 @@
 
 		        <li><a href="javascript:void(0)"><%= link_to "My Groups", groups_path %></a></li>
 		        <li><a href="javascript:void(0)"><%= link_to "My Friends", following_users_path %></a></li>
-						
-						
-						
-						
-						
-						
-						
-						
+										
 					<% end %>
-	        <!-- <li class="navigation-search-bar">
+					
+					
+					<!-- <%= form_tag("/search", method: "get") do %>
+					  <%= label_tag(:query, "Search for:") %>
+					  <%= text_field_tag(:query) %>
+					  <%= submit_tag("Search") %>
+					<% end %> -->
+						
+						<!-- form_for(:search, url: search_path, method: :get) do |form|
+						
+							form.text_field :query, placeholder: search here
+							form.submit "Search"
+						
+						end -->
+					
+					
+							
+					
+	        <li class="navigation-search-bar">
+						
 	          <div class="search-bar">
 	            <div class="search-and-submit">
-	              <input type="search" placeholder="Enter Search" />
+								
+								
+									<div class="search-field"><%= form_tag("/search", method: "get") do %></div>
+								
+								  <div class=field><%= text_field_tag(:query) %></div>
+		              <button type="submit">
+		                <img src="https://raw.githubusercontent.com/Magnus-G/Random/master/search-icon.png" alt="">
+		              </button>
+								<% end %>
+								
+	              <!-- <input type="search" placeholder="Enter Search" />
 	              <button type="submit">
 	                <img src="https://raw.githubusercontent.com/Magnus-G/Random/master/search-icon.png" alt="">
-	              </button>
+	              </button> -->
+								
+								
 	            </div>
 	          </div>
-	        </li> -->
+						
+	        </li>
+						
+						
 					<% if signed_in? %>
 		        <li class="sign-up"><%= link_to 'Sign out', sign_out_path, :method => :delete %></a></li>
 					<% else %>

@@ -19,7 +19,8 @@
 
 	<%= form.text_field :name, placeholder: "Name" %>
 	<%= form.text_area :description, placeholder: "Description" %>
-	<%= form.text_field :url, placeholder: "URL" %>
+  <%= form.text_field :url, placeholder: "URL" %> 
+  <%= form.text_field :tag_list, placeholder: "Tags (separated by commas)" %>
 	<div>
 			<%= form.collection_check_boxes :group_ids, @groups, :id, :name %> <!-- #sending an array of values rather than a single value. -->
 	</div>

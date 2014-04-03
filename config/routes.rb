@@ -27,6 +27,10 @@ Pixtr::Application.routes.draw do
                                
   end
   
+  get 'tags/:tag', to: 'images#index', as: :tag
+  
+  get '/search', to: 'searches#index'
+  
   resources :groups, only: [:index, :new, :create, :show] do
     member do 
       post "join" => "group_memberships#create"

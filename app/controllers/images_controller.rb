@@ -1,5 +1,14 @@
 class ImagesController < ApplicationController
   
+  def index
+    if params[:tag]
+      @images = Image.tagged_with(params[:tag])
+    else
+      @images = Image.all
+    end
+  end
+  
+  
   def show
     @image = Image.find(params[:id])
     
@@ -7,7 +16,7 @@ class ImagesController < ApplicationController
     
     @comments = @image.comments.includes(:user).recent.page(params[:page]).per(2)      #.where("body ILIKE ? '%wombat%'")
     
-    
+    @tags = @image.tags 
     
   end
   
@@ -72,6 +81,7 @@ class ImagesController < ApplicationController
       :name, 
       :description, 
       :url,
+      :tag_list,
       group_ids: [] #must come last in the order
     )
   end
