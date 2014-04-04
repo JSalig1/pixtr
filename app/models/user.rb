@@ -39,7 +39,11 @@ class User < ActiveRecord::Base
     # foriegn_key: ....?
     
   has_many :activities
-    
+  
+  
+  def upgraded?
+    customer_id.present?
+  end  
   
   
   def following? user
@@ -68,6 +72,8 @@ class User < ActiveRecord::Base
   
   def join group
     # groups << group
+    
+
     group_membership = group_memberships.create(group: group)
     notify_followers(group_membership, "GroupMembershipActivity", group)
     # followers.each do |follower|

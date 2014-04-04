@@ -45,6 +45,8 @@ gem 'daemons'
 
 gem 'acts-as-taggable-on'
 
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -59,6 +61,7 @@ group :development do
   gem 'letter_opener'
   gem 'quiet_assets'
   gem 'bullet'
+  gem 'dotenv-rails'
 #   gem 'pry-rails'
 #   gem 'better_errors'
 #   gem 'binding_of_caller'
