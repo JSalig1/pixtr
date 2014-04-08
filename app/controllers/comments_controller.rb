@@ -27,10 +27,6 @@ class CommentsController < ApplicationController
 
   end
   
-  
-  
-  
-  
   private
   
   def comment_params #whitelisting attributes to avoid forbidden attributes error! called Strong Params.

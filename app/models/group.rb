@@ -6,4 +6,6 @@ class Group < ActiveRecord::Base
   has_many :images, through: :group_images
   
   validates :name, presence: true  
+  
+   
 end

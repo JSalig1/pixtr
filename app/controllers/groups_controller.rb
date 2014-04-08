@@ -13,14 +13,11 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     if @group.save
-      # @group.members << current_user
       current_user.join @group
       redirect_to @group
     else
-      render :new
-      
-    end
-  
+      render :new      
+    end 
   end
   
   def show

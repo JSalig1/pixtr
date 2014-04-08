@@ -17,13 +17,17 @@ class Image < ActiveRecord::Base
     gallery.user
   end
   
-  def self.search(search)
-    if search
-      find(:all, :conditions => ['name ILIKE ?', "%#{search}%"])
-      find(:all, :conditions => ['description ILIKE ?', "%#{search}%"])
-    else
-      find(:all)
-    end
-  end
+  
+  # moved to ImageSearcher model --  extract class patter, single responsibility principle
+  
+  
+  # def self.search(search)
+  #   if search
+  #     find(:all, :conditions => ['name ILIKE ?', "%#{search}%"])
+  #     find(:all, :conditions => ['description ILIKE ?', "%#{search}%"])
+  #   else
+  #     find(:all)
+  #   end
+  # end
   
 end

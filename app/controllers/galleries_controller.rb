@@ -18,7 +18,7 @@ class GalleriesController < ApplicationController
   end
   
   def show
-    @gallery = Gallery.find(params[:id])  #params either comes from the forms (including URL) or the POST
+    @gallery = find_gallery
     @images = @gallery.images.includes(gallery: [:user])
   end
   
@@ -43,11 +43,11 @@ class GalleriesController < ApplicationController
   end
   
   def edit
-    @gallery = current_user.galleries.find(params[:id]) 
+    @gallery = find_gallery_owned_by_user 
   end
   
   def update
-    @gallery = current_user.galleries.find(params[:id])
+    @gallery = find_gallery_owned_by_user
     if @gallery.update(gallery_params)
       redirect_to gallery_path(@gallery)
     else
@@ -56,7 +56,7 @@ class GalleriesController < ApplicationController
   end
   
   def destroy
-    gallery = current_user.galleries.find(params[:id])   
+    gallery = find_gallery_owned_by_user
     # gallery = Gallery.find(params[:id])
     gallery.destroy
     redirect_to galleries_path
@@ -64,6 +64,14 @@ class GalleriesController < ApplicationController
   
    
   private
+  
+  def find_gallery
+    Gallery.find(params[:id])  #params either comes from the forms (including URL) or the POST
+  end
+  
+  def find_gallery_owned_by_user
+    current_user.galleries.find(params[:id])
+  end
   
   def gallery_params #whitelisting attributes to avoid forbidden attributes error! called Strong Params.
     params.require(:gallery).permit(:name)
