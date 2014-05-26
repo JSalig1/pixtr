@@ -13,7 +13,9 @@ class CommentsController < ApplicationController
     if @comment.save
       #redirect_to image, notice: "Comment added!" # can also use alert: in place of notice:
       
-      current_user.notify_followers(@comment, "CommentActivity", @image)
+      activity = Activity.new_activity(@comment, @image, current_user)
+      
+      notify_followers(@comment, @image)
       
     else
       redirect_to @image, alert: "Can not comment with an empty comment."  # can also use notice: in place of alert:
