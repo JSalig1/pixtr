@@ -1,79 +1,80 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Pixtr</title>
-    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-    <%= csrf_meta_tags %>
-  </head>
-  <body class="layout-background">
-    <header class="navigation">
-      <div class="menu-wrapper">
-        <a href="javascript:void(0)" class="logo">
-          <img src="https://raw.github.com/Magnus-G/Random/master/placeholder_logo_1.png" alt="">
-        </a>
-        <p class="menu-button" id="js-mobile-menu">MENU</p>
-        <div class="nav">
-          <ul id="navigation-menu">
-            <% if signed_in? %>
-              <li><a href="javascript:void(0)"><%= link_to "My Galleries", galleries_path %></a></li>
-              <li><a href="javascript:void(0)"><%= link_to "My Groups", groups_path %></a></li>
-              <li><a href="javascript:void(0)"><%= link_to "My Friends", following_users_path %></a></li>
-            <% end %>
+<head>
+  <title>Pixtr</title>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="layout-background">
+  <header class="navigation">
+    <div class="menu-wrapper">
+      <a href="javascript:void(0)" class="logo">
+        <img src="https://raw.github.com/Magnus-G/Random/master/placeholder_logo_1.png" alt="">
+      </a>
+      <p class="menu-button" id="js-mobile-menu">MENU</p>
+      <div class="nav">
+        <ul id="navigation-menu">
+          <% if signed_in? %>
+            <li><a href="javascript:void(0)"><%= link_to "My Galleries", galleries_path %></a></li>
+            <li><a href="javascript:void(0)"><%= link_to "My Groups", groups_path %></a></li>
+            <li><a href="javascript:void(0)"><%= link_to "My Friends", following_users_path %></a></li>
+          <% end %>
 
-            <li class="navigation-search-bar">
-              <div class="search-bar">
-                <div class="search-and-submit">
-                  <div class="search-field"><%= form_tag("/search", method: "get") do %></div>
+          <li class="navigation-search-bar">
+            <div class="search-bar">
+              <div class="search-and-submit">
+                <div class="search-field"><%= form_tag("/search", method: "get") do %></div>
                   <div class=field><%= text_field_tag(:query) %></div>
                   <button type="submit">
                     <img src="https://raw.githubusercontent.com/Magnus-G/Random/master/search-icon.png" alt="">
                   </button>
-                </div>
+                <% end %>
               </div>
-            </li>
-            <% if signed_in? %>
-              <li class="sign-up"><%= link_to 'Sign out', sign_out_path, :method => :delete %></a></li>
-            <% else %>
-              <li class="sign-up"><%= link_to 'Sign in', sign_in_path %></a></li>
-            <% end %>
-            <% if signed_in? && !current_user.upgraded? %>
-              <li class="subscribe"><%= link_to 'Go PRO', new_charge_path %></a></li>
-            <% end %>
-          </ul>
-        </div>
+            </div>
+          </li>
+          <% if signed_in? %>
+            <li class="sign-up"><%= link_to 'Sign out', sign_out_path, :method => :delete %></a></li>
+          <% else %>
+            <li class="sign-up"><%= link_to 'Sign in', sign_in_path %></a></li>
+          <% end %>
+          <% if signed_in? && !current_user.upgraded? %>
+            <li class="subscribe"><%= link_to 'Go PRO', new_charge_path %></a></li>
+          <% end %>
+        </ul>
       </div>
-    </header>
-    <% if signed_in? %>
-      <div class="sign-in-status">Signed in as: <%= current_user.email %></a></div>
-    <% end %>
-    <% if signed_in? && current_user.upgraded? %>
-      <div class="sign-in-status">You're a Rockstar!</a></div>
-    <% end %>
+    </div>
+  </header>
+  <% if signed_in? %>
+    <div class="sign-in-status">Signed in as: <%= current_user.email %></a></div>
+  <% end %>
+  <% if signed_in? && current_user.upgraded? %>
+    <div class="sign-in-status">You're a Rockstar!</a></div>
+  <% end %>
 
-    <script>
-      $(function() {
-        var menu = $('#navigation-menu');
-        var menuToggle = $('#js-mobile-menu');
+  <script>
+    $(function() {
+      var menu = $('#navigation-menu');
+      var menuToggle = $('#js-mobile-menu');
 
-        $(menuToggle).on('click', function(e) {
-          e.preventDefault();
-          menu.slideToggle(function(){
-            if(menu.is(':hidden')) {
-              menu.removeAttr('style');
-            }
-          });
+      $(menuToggle).on('click', function(e) {
+        e.preventDefault();
+        menu.slideToggle(function(){
+          if(menu.is(':hidden')) {
+            menu.removeAttr('style');
+          }
         });
       });
-    </script>
+    });
+  </script>
 
-    <div id="flash">
-      <% flash.each do |key, value| %>
-        <div class="flash <%= key %>"><%= value %></div>
-      <% end %>
-    </div>
-    <div>
-      <%= yield %>
-    </div>
-  </body>
+  <div id="flash">
+    <% flash.each do |key, value| %>
+      <div class="flash <%= key %>"><%= value %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= yield %>
+  </div>
+</body>
 </html>
