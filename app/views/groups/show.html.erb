@@ -1,33 +1,9 @@
 <h2><%= @group.name %></h2>
 
-
 <%= render "like_button", group: @group %>
 
-<!-- <div id="like_button_form">	
-	<% if current_user.like? @group %>
-		<%= button_to "Unlike this Group", unlike_group_path, method: :delete, remote: true %>
-	<% else %>
-		<%= button_to "Like this Group", like_group_path, remote: true %>
-	<% end %>
-</div> -->
-
-
 <% if signed_in? %>
-
-	<%= render "join_group_button", group: @group %>
-	
-	<!-- above line extrated the below to a new partial -->
-	
-	<!-- <div id="membership_button_form">
-		<% if !current_user.member? @group %>
-			<%= button_to "Join Group", join_group_path(@group), remote: true %>
-		<% else %>
-			<%= button_to "Leave Group", leave_group_path(@group), method: :delete, remote: true %>
-		<% end %>
-	</div> -->
-	
-	
-
+  <%= render "join_group_button", group: @group %>
 <% end %>
 
 <p>	

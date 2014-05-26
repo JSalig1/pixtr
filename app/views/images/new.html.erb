@@ -1,20 +1,15 @@
 <body class="form-background">
-	<div class="form">
-		<%= form_for([@gallery, @image]) do |form| %>   <!-- #note the parenthesis are optional and you should leave them off in practice -->
-
-			<% if @image.errors.any? %>
-
-				<%= render "form_errors", target: @image %>
-
-			<% end %>
-	
-			<%= form.text_field :name, placeholder: "Name" %>
-			<%= form.text_field :description, placeholder: "Description" %>
-			<%= form.text_field :url, placeholder: "URL" %>
-			<div class="form-button">
-				<%= form.submit "Add Image" %>
-			</div>
-		<% end %>
-	
-	</div>
+  <div class="form">
+    <%= form_for([@gallery, @image]) do |form| %>
+      <% if @image.errors.any? %>
+        <%= render "form_errors", target: @image %>
+      <% end %>
+      <%= form.text_field :name, placeholder: "Name" %>
+      <%= form.text_field :description, placeholder: "Description" %>
+      <%= form.text_field :url, placeholder: "URL" %>
+      <div class="form-button">
+        <%= form.submit "Add Image" %>
+      </div>
+    <% end %>
+  </div>
 </body>

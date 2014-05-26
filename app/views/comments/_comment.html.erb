@@ -1,15 +1,11 @@
 <div>
-	<%= div_for comment do %>
-		<p><%= comment.user.email %> said: </p>
-		<p><%= comment.body %> </p>
-		<p><%= time_ago_in_words(comment.created_at) %> ago </p>
-	
+<%= div_for comment do %>
+  <p><%= comment.user.email %> said: </p>
+  <p><%= comment.body %> </p>
+  <p><%= time_ago_in_words(comment.created_at) %> ago </p>
 
-		<% if current_user && comment.user == current_user %>
-			<%= button_to "Delete comment", comment, method: :delete, remote: true, confirm: "Are you sure?" %>	
-		<% end %>
-	<% end %>
-
-	<br>
-
+    <% if current_user && comment.user == current_user %>
+      <%= button_to "Delete comment", comment, method: :delete, remote: true, confirm: "Are you sure?" %>	
+    <% end %>
+  <% end %>
 </div>

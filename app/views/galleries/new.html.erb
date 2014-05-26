@@ -1,14 +1,11 @@
 <body class="form-background">
-	<div class="form">
-	<%= form_for(@gallery) do |form| %>
-
-		<%= render "form_errors", target: @gallery %> <!-- #render takes in two things: a path to a partial, and an argument to pass in variables -->
-
-		<%= form.text_field :name %>
-		<div class="form-button">
-			<%= form.submit "Create Gallery" %>
-		</div>
-	<% end %>
-	</div>
+  <div class="form">
+    <%= form_for(@gallery) do |form| %>
+    <%= render "form_errors", target: @gallery %>
+    <%= form.text_field :name %>
+      <div class="form-button">
+        <%= form.submit "Create Gallery" %>
+      </div>
+    <% end %>
+  </div>
 </body>
-

@@ -1,9 +1,8 @@
 class ImageSearcher
-  
   def initialize(query)
     @query = query
   end
-  
+
   def search
     if @query
       Image.includes(gallery: [:user]).find(:all, :conditions => ['name ILIKE ?', "%#{@query}%"])
@@ -12,5 +11,4 @@ class ImageSearcher
       Image.includes(gallery: [:user]).find(:all)
     end
   end
-  
 end

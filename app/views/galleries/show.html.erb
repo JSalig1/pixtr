@@ -1,39 +1,15 @@
 <%= link_to "<<index", galleries_path %>
 
-<h1> <%= @gallery.name %> </h1>
+<h1><%= @gallery.name %></h1>
 
 <%= render "like_button", gallery: @gallery %>
 
-<!-- <div id="like_button_form">
-	<% if current_user.like? @gallery %>
-		<%= button_to "Unlike this Gallery", unlike_gallery_path, method: :delete, remote: true %>
-	<% else %>
-		<%= button_to "Like this Gallery", like_gallery_path, remote: true %>
-	<% end %>
-</div> -->
-
-
 <nav>
-	<% if @gallery.user == current_user %>
-	<%= link_to "Edit Gallery", edit_gallery_path(@gallery) %>
-	<!-- <%= link_to "Edit Gallery", "/galleries/#{@gallery.id}/edit" %> -->
-
-	<%= link_to "Delete Gallery", @gallery, method: :delete, confirm: "Are you sure?" %> <!-- #implicitly calls 'polymorphic_path' method on @gallery which is the same as the line below! -->
-	<!-- <%= link_to "Delete Gallery", gallery_path(@gallery), method: :delete %> -->
-	<!-- <%= link_to "Delete Gallery", "/galleries/#{@gallery.id}", method: :delete %> -->
-	
-	<%= link_to "Add Image", new_gallery_image_path(@gallery) %> <!-- #we need gallery there with the id so the app knows which gallery the image belongs to. -->
-	<% end %>
+  <% if @gallery.user == current_user %>
+    <%= link_to "Edit Gallery", edit_gallery_path(@gallery) %>
+    <%= link_to "Delete Gallery", @gallery, method: :delete, confirm: "Are you sure?" %>
+    <%= link_to "Add Image", new_gallery_image_path(@gallery) %>
+  <% end %>
 </nav>
 
-<br>
-<br>
-<br>
-
 <%= render @images %>
-
-
-
-
-
-
