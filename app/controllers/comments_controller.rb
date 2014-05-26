@@ -1,12 +1,8 @@
 class CommentsController < ApplicationController
-  
   def show
-   
   end
-  
+
   def create
-    
-    
     @image = Image.find(params[:image_id])
     # comment = current_user.make_comment(comment_params) #can also go this way....
     @comment = @image.comments.new(comment_params) # can also use: comment = image.comments.build(comment_params)
